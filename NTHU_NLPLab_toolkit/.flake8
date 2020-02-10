@@ -1,0 +1,8 @@
+[flake8]
+exclude = .git,__pycache__,docs/source/conf.py,old,build,dist
+max-complexity = 10
+count=True
+exit-zero=True
+max-line-length=127
+statistics=True
+doctests=True

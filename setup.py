@@ -4,7 +4,7 @@ with open("README.md", "r") as fh:
     long_description = fh.read()
 
 setuptools.setup(
-    name="NTHU_NLPLab_toolkit", # Replace with your own username
+    name="NTHU_NLPLab_toolkit",  # Replace with your own username
     version="0.0.3",
     author="sappy5678",
     author_email="sappy@nlplab.cc",
@@ -17,5 +17,5 @@ setuptools.setup(
         "Programming Language :: Python :: 3",
         "Operating System :: OS Independent",
     ],
-    python_requires='>=3.6',
+    python_requires=">=3.6",
 )
