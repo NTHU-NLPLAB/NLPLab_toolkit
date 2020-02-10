@@ -1,0 +1,5 @@
+watchmedo shell-command \
+    --patterns="*.py;*.rst" \
+    --recursive \
+    --command='make html' \
+    ..

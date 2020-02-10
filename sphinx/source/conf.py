@@ -32,6 +32,7 @@ extensions = [
     'sphinx.ext.doctest',
     'sphinx.ext.coverage', 
     'sphinx.ext.napoleon',
+    'sphinx.ext.githubpages'
 ]
 
 # autodoc_typehints = 'description'
