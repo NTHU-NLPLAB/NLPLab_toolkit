@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 import requests
 import urllib
-import string
 
 from .config import NGRAM_API_URI, EXP_API_URI, NgramResult
 
@@ -60,14 +59,15 @@ ngrams=[['discuss the issue', 147489], ['discuss about the issue', 98]], total=1
         -------
         >>> api = LinggleAPI(ver='x')
         >>> api.query(u'吃藥', x_lang='zh')
-        NgramResult(query='吃藥', ngrams=[["to take medicine", 13300], ["take medicine", 27990], \
-["and take medicines", 359], ["take medicines", 10861], ["taking medicine", 26999]], \
+        NgramResult(query='吃藥', ngrams=[['to take medicine', 13300], ['take medicine', 27990], \
+['and take medicines', 359], ['take medicines', 10861], ['taking medicine', 26999]], \
 total=79509)
         """
         if x_lang == "zh":
-            self.ngram_api = NGRAM_API_URI.replace("query", "equery")
+            # self.ngram_api = NGRAM_API_URI.replace("query", "equery")
+            self.ngram_api = "https://x.linggle.com/equery/"
         query = query.replace("/", "@")
-        query = urllib.parse.quote(query, safe=string.printable)
+        query = urllib.parse.quote(query, safe="")
         req = requests.get(self.ngram_api + query)
         if req.status_code == 200:
             return NgramResult(**req.json())
