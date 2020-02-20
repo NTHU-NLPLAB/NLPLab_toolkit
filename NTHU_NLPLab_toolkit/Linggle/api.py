@@ -20,7 +20,7 @@ class LinggleAPI(dict):
             * cna - 中央社
             * udn - 聯合新聞網
             * zh
-
+            * x - 雙語Linggle
     """
 
     def __init__(self, ver="www"):
@@ -30,7 +30,7 @@ class LinggleAPI(dict):
     def __getitem__(self, query):
         return self.query(query)
 
-    def query(self, query):
+    def query(self, query, x_lang = "en"):
         """This function query Linggle by query argument
 
         Parameters
@@ -38,7 +38,9 @@ class LinggleAPI(dict):
         query : str
             The query string to query Linggle
             you can check `Linggle <https://linggle.com/>`_ for more details.
-
+        x_lang : str("en" | "zh")
+            The query language to use in x.linggle, this parameters only applied when version is set as "x".
+            Default value is "en".
         Returns
         -------
         NgramResult : tuple
@@ -53,7 +55,16 @@ class LinggleAPI(dict):
         NgramResult(query='discuss ?about the issue', \
 ngrams=[['discuss the issue', 147489], ['discuss about the issue', 98]], total=147587)
 
+        Example - x.linggle
+        -------
+        >>> api = LinggleAPI(ver='x')
+        >>> api.query('吃藥', x_lang='zh')
+        NgramResult(query='吃藥', ngrams=[["to take medicine", 13300], ["take medicine", 27990], \
+["and take medicines", 359], ["take medicines", 10861], ["taking medicine", 26999]], \
+total=79509)
         """
+        if x_lang == "zh":
+            self.ngram_api = NGRAM_API_URI.replace("query", "equery")
         query = query.replace("/", "@")
         query = urllib.parse.quote(query, safe="")
         req = requests.get(self.ngram_api + query)
