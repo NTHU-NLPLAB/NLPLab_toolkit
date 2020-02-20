@@ -1,11 +1,21 @@
 # -*- coding: utf-8 -*-
 import requests
 import urllib
-
+from abc import abstractmethod
 from .config import NGRAM_API_URI, EXP_API_URI, NgramResult
 
+class API():
+    
+    @abstractmethod
+    def query(self, query):
+        return NotImplemented
 
-class LinggleAPI(dict):
+    @abstractmethod
+    def get_example(self, ngram_str):
+        return NotImplemented
+
+
+class LinggleAPI(API):
     # ver: Version can be `www`, `coca`, `cna`, `udn`, `zh`
     """This is `Linggle <https://linggle.com/>`_ api class.
     you can use ver parameter to select different API version.
@@ -15,7 +25,7 @@ class LinggleAPI(dict):
     ----------
     ver : {'www', 'coca', 'cna', 'udn', 'zh', 'x'}
         version of different linggle API
-            * www
+            * www - Google 1T
             * coca - Corpus of Contemporary American English
             * cna - 中央社
             * udn - 聯合新聞網
@@ -28,8 +38,8 @@ class LinggleAPI(dict):
         self.ngram_api = NGRAM_API_URI.format(ver)
         self.example_api = EXP_API_URI.format(ver)
 
-    def __getitem__(self, query):
-        return self.query(query)
+    # def __getitem__(self, query):
+    #     return self.query(query)
 
     def query(self, query, x_lang = "en"):
         """This function query Linggle by query argument
