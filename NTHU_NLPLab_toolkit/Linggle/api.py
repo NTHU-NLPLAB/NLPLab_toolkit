@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 import requests
 import urllib
+import string
 
 from .config import NGRAM_API_URI, EXP_API_URI, NgramResult
 
@@ -66,7 +67,7 @@ total=79509)
         if x_lang == "zh":
             self.ngram_api = NGRAM_API_URI.replace("query", "equery")
         query = query.replace("/", "@")
-        query = urllib.parse.quote(query, safe="")
+        query = urllib.parse.quote(query, safe=string.printable)
         req = requests.get(self.ngram_api + query)
         if req.status_code == 200:
             return NgramResult(**req.json())
