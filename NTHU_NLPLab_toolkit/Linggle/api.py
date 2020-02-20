@@ -24,6 +24,7 @@ class LinggleAPI(dict):
     """
 
     def __init__(self, ver="www"):
+        self.ver = ver
         self.ngram_api = NGRAM_API_URI.format(ver)
         self.example_api = EXP_API_URI.format(ver)
 
@@ -39,7 +40,7 @@ class LinggleAPI(dict):
             The query string to query Linggle
             you can check `Linggle <https://linggle.com/>`_ for more details.
         x_lang : str{'en', 'zh'}
-            The query language to use in x.linggle, this parameters only applied when version is set as "x".
+            The query language to use in x.linggle, this parameter will only be applied when version is set as "x".
             Default value is "en".
         Returns
         -------
@@ -63,7 +64,7 @@ ngrams=[['discuss the issue', 147489], ['discuss about the issue', 98]], total=1
 ['and take medicines', 359], ['take medicines', 10861], ['taking medicine', 26999]], \
 total=79509)
         """
-        if x_lang == "zh":
+        if x_lang == "zh" and self.ver == "x":
             # self.ngram_api = NGRAM_API_URI.replace("query", "equery")
             self.ngram_api = "https://x.linggle.com/equery/"
         query = query.replace("/", "@")
