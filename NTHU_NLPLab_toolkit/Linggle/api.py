@@ -13,7 +13,7 @@ class LinggleAPI(dict):
 
     Parameters
     ----------
-    ver : {'www', 'coca', 'cna', 'udn', 'zh'}
+    ver : {'www', 'coca', 'cna', 'udn', 'zh', 'x'}
         version of different linggle API
             * www
             * coca - Corpus of Contemporary American English
@@ -38,7 +38,7 @@ class LinggleAPI(dict):
         query : str
             The query string to query Linggle
             you can check `Linggle <https://linggle.com/>`_ for more details.
-        x_lang : str("en" | "zh")
+        x_lang : str{'en', 'zh'}
             The query language to use in x.linggle, this parameters only applied when version is set as "x".
             Default value is "en".
         Returns
