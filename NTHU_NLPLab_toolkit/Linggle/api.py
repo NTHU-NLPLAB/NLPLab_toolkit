@@ -72,14 +72,14 @@ class LinggleAPI(API):
 
         Example
         -------
-        >>> api = LinggleAPI()
+        >>> api = Factory.GetAPI('www')
         >>> api.query('discuss ?about the issue')
         NgramResult(query='discuss ?about the issue', \
 ngrams=[['discuss the issue', 147489], ['discuss about the issue', 98]], total=147587)
 
         Example - x.linggle
         -------
-        >>> api = LinggleAPI(ver='x')
+        >>> api = Factory.GetAPI('x')
         >>> api.query(u'吃藥', x_lang='zh')
         NgramResult(query='吃藥', ngrams=[['to take medicine', 13300], ['take medicine', 27990], \
 ['and take medicines', 359], ['take medicines', 10861], ['taking medicine', 26999]], \
