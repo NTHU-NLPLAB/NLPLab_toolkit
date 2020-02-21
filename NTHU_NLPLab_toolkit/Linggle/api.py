@@ -11,8 +11,10 @@ class Factory():
     def GetAPI(name='www'):
         if name not in API_LIST:
             return None
-        if name in ['www','coca','cna', 'udn', 'zh', 'x']:
+        if name in ['www', 'coca', 'cna', 'udn', 'zh', 'x']:
             return LinggleAPI(name)
+        if name == 'bi':
+            return PhraseBookAPI()
 
 
 class API():
@@ -24,6 +26,26 @@ class API():
     @abstractmethod
     def get_example(self, ngram_str):
         return NotImplemented
+
+
+class PhraseBookAPI(API):
+
+    def __init__(self):
+        self.API_URI = "https://bi.linggle.com/phrase/"
+        self.EXAMPLE_URI = "https://bi.linggle.com/sentence"
+
+    def query(self, query, offset=0):
+        self.data = {"offset": offset}
+        query = urllib.parse.quote(query, safe="")
+        req = requests.get(self.API_URI + query)
+        if req.status_code == 200:
+            return req.json()
+
+    def get_example(self, phrase_array):
+        req = requests.get(self.EXAMPLE_URI, params={"ch": phrase_array[0], "en": phrase_array[1]})
+        if req.status_code == 200:
+            return req.json()
+        
 
 
 class LinggleAPI(API):
