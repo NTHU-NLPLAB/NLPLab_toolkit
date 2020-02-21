@@ -2,10 +2,21 @@
 import requests
 import urllib
 from abc import abstractmethod
-from .config import NGRAM_API_URI, EXP_API_URI, NgramResult
+from .config import NGRAM_API_URI, EXP_API_URI, API_LIST, NgramResult
+
+
+class Factory():
+
+    @staticmethod
+    def GetAPI(name='www'):
+        if name not in API_LIST:
+            return None
+        if name in ['www','coca','cna', 'udn', 'zh', 'x']:
+            return LinggleAPI(name)
+
 
 class API():
-    
+
     @abstractmethod
     def query(self, query):
         return NotImplemented
@@ -16,7 +27,7 @@ class API():
 
 
 class LinggleAPI(API):
-    # ver: Version can be `www`, `coca`, `cna`, `udn`, `zh`
+    # ver: Version can be `www`, `coca`, `cna`, `udn`, `zh, `x`
     """This is `Linggle <https://linggle.com/>`_ api class.
     you can use ver parameter to select different API version.
 
@@ -41,7 +52,7 @@ class LinggleAPI(API):
     # def __getitem__(self, query):
     #     return self.query(query)
 
-    def query(self, query, x_lang = "en"):
+    def query(self, query, x_lang="en"):
         """This function query Linggle by query argument
 
         Parameters
@@ -121,7 +132,10 @@ total=79509)
          "Hawaii 's seventh-largest island nearly every day ."]
 
         """
-        req = requests.post(self.example_api, json={"ngram": ngram_str})
+        if self.ver == "x":
+            req = requests.get("https://x.linggle.com/tgtngram/")
+        else:
+            req = requests.post(self.example_api, json={"ngram": ngram_str})
         if req.status_code == 200:
             result = req.json()
             return result.get("examples", [])
