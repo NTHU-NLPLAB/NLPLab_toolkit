@@ -3,7 +3,7 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-Welcome to NTHU_NLPLab_toolkit's documentation!
+Welcome to linggle-leap's documentation!
 ===============================================
 
 Quickstart
@@ -11,7 +11,7 @@ Quickstart
 
 Install
 
-``pip install NTHU_NLPLab_toolkit``
+``pip install linggle-leap``
 
 .. toctree::
    :maxdepth: 2

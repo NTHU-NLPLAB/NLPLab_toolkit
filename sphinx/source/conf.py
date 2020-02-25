@@ -13,12 +13,12 @@
 import os
 import sys
 
-sys.path.insert(0, os.path.abspath("../../NTHU_NLPLab_toolkit"))
+sys.path.insert(0, os.path.abspath("../../linggle_leap"))
 
 
 # -- Project information -----------------------------------------------------
 
-project = "NTHU_NLPLab_toolkit"
+project = "linggle_leap"
 copyright = "2020, sappy"
 author = "sappy"
 

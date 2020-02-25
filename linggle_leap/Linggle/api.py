@@ -5,20 +5,18 @@ from abc import abstractmethod
 from .config import NGRAM_API_URI, EXP_API_URI, API_LIST, NgramResult
 
 
-class Factory():
-
+class Factory:
     @staticmethod
-    def GetAPI(name='www'):
+    def GetAPI(name="www"):
         if name not in API_LIST:
             return None
-        if name in ['www', 'coca', 'cna', 'udn', 'zh', 'x']:
+        if name in ["www", "coca", "cna", "udn", "zh", "x"]:
             return LinggleAPI(name)
-        if name == 'bi':
+        if name == "bi":
             return PhraseBookAPI()
 
 
-class API():
-
+class API:
     @abstractmethod
     def query(self, query):
         return NotImplemented
@@ -29,7 +27,6 @@ class API():
 
 
 class PhraseBookAPI(API):
-
     def __init__(self):
         self.API_URI = "https://bi.linggle.com/phrase/"
         self.EXAMPLE_URI = "https://bi.linggle.com/sentence"
@@ -42,18 +39,20 @@ class PhraseBookAPI(API):
             return req.json()
 
     def get_example(self, phrase_array):
-        req = requests.get(self.EXAMPLE_URI, params={"ch": phrase_array[0], "en": phrase_array[1]})
+        req = requests.get(
+            self.EXAMPLE_URI, params={"ch": phrase_array[0], "en": phrase_array[1]}
+        )
         if req.status_code == 200:
             return req.json()
-        
 
 
+# ver: Version can be `www`, `coca`, `cna`, `udn`, `zh, `x`
 class LinggleAPI(API):
-    # ver: Version can be `www`, `coca`, `cna`, `udn`, `zh, `x`
     """This is `Linggle <https://linggle.com/>`_ api class.
     you can use ver parameter to select different API version.
 
-
+    ver: Version can be `www`, `coca`, `cna`, `udn`, `zh, `x`
+    
     Parameters
     ----------
     ver : {'www', 'coca', 'cna', 'udn', 'zh', 'x'}
