@@ -3,7 +3,7 @@ import setuptools
 with open("README.md", "r") as fh:
     long_description = fh.read()
 
-PYPI_NAME = "linggle-leap"
+PYPI_NAME = "linggle_leap"
 
 with open(f'{PYPI_NAME}/requirements.txt') as fp:
     install_requires = fp.readlines()
