@@ -3,9 +3,9 @@ import setuptools
 with open("README.md", "r") as fh:
     long_description = fh.read()
 
-PYPI_NAME = "NTHU_NLPLab_toolkit"
+PYPI_NAME = "linggle-leap"
 
-with open(f'NTHU_NLPLab_toolkit/requirements.txt') as fp:
+with open(f'{PYPI_NAME}/requirements.txt') as fp:
     install_requires = fp.readlines()
 
 install_requires = filter(lambda x: x.strip() != '', install_requires)
