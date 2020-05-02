@@ -52,7 +52,7 @@ class LinggleAPI(API):
     you can use ver parameter to select different API version.
 
     ver: Version can be `www`, `coca`, `cna`, `udn`, `zh, `x`
-    
+
     Parameters
     ----------
     ver : {'www', 'coca', 'cna', 'udn', 'zh', 'x'}
@@ -93,6 +93,7 @@ class LinggleAPI(API):
 
         Example
         -------
+        >>> from linggle_leap.Linggle.api import Factory
         >>> api = Factory.GetAPI('www')
         >>> api.query('discuss ?about the issue')
         NgramResult(query='discuss ?about the issue', \
@@ -100,6 +101,7 @@ ngrams=[['discuss the issue', 147489], ['discuss about the issue', 98]], total=1
 
         Example - x.linggle
         -------
+        >>> from linggle_leap.Linggle.api import Factory
         >>> api = Factory.GetAPI('x')
         >>> api.query(u'吃藥', x_lang='zh')
         NgramResult(query='吃藥', ngrams=[['to take medicine', 13300], ['take medicine', 27990], \
@@ -130,6 +132,7 @@ total=79509)
 
         Example
         -------
+        >>> from linggle_leap.Linggle.api import LinggleAPI
         >>> from pprint import pprint
         >>> api = LinggleAPI()
         >>> pprint(api.get_example('get a'))
