@@ -1,2 +1,2 @@
-__all__ = ["Linggle"]
-from . import Linggle
+__all__ = ["linggle"]
+from . import linggle
