@@ -2,7 +2,7 @@
 import requests
 import urllib
 from abc import abstractmethod
-from .config import NGRAM_API_URI, EXP_API_URI, API_LIST, NgramResult
+from .config import NGRAM_API_URI, EXP_API_URI, API_LIST
 
 
 class APIFactory:
