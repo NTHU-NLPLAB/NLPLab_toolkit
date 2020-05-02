@@ -52,7 +52,7 @@ class LinggleAPI(API):
     you can use ver parameter to select different API version.
 
     ver: Version can be `www`, `coca`, `cna`, `udn`, `zh, `x`
-    
+
     Parameters
     ----------
     ver : {'www', 'coca', 'cna', 'udn', 'zh', 'x'}
