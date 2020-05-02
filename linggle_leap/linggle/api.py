@@ -135,14 +135,14 @@ class LinggleAPI(API):
         >>> from linggle_leap.linggle.api import APIFactory
         >>> api = APIFactory.get_api('www')
         >>> api.query('discuss ?about the issue')
-        ...
+        {...}
 
         Example - x.linggle
         -------
         >>> from linggle_leap.linggle.api import APIFactory
         >>> api = APIFactory.get_api('x')
         >>> api.query(u'吃藥', x_lang='zh')
-        ...
+        {...}
         """
         if x_lang == "zh" and self.ver == "x":
             # self.ngram_api = NGRAM_API_URI.replace("query", "equery")
