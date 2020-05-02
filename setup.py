@@ -5,15 +5,15 @@ with open("README.md", "r") as fh:
 
 PYPI_NAME = "linggle_leap"
 
-with open(f'{PYPI_NAME}/requirements.txt') as fp:
+with open(f"{PYPI_NAME}/requirements.txt") as fp:
     install_requires = fp.readlines()
 
-install_requires = filter(lambda x: x.strip() != '', install_requires)
+install_requires = filter(lambda x: x.strip() != "", install_requires)
 install_requires = list(install_requires)
 
 setuptools.setup(
     name=f"{PYPI_NAME}",  # Replace with your own username
-    version="0.0.1",
+    version="0.0.2",
     author="sappy5678",
     author_email="sappy@nlplab.cc",
     description="This toolkit is maintained by NTHU NLP Lab",
