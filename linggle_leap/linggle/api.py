@@ -10,7 +10,7 @@ class APIFactory:
     you can use ver parameter to select different API version.
 
     ver: Version can be `www`, `coca`, `cna`, `udn`, `zh, `x`, `bi`
-    
+
     Parameters
     ----------
     ver : {'www', 'coca', 'cna', 'udn', 'zh', 'x', 'bi'}
@@ -33,7 +33,7 @@ class APIFactory:
         name : str{'www', 'coca', 'cna', 'udn', 'zh', 'x', 'bi'}
             The query string to query Linggle
             you can check `Linggle <https://linggle.com/>`_ for more details.
-     
+
         Returns
         -------
         NgramResult : dict
@@ -91,7 +91,7 @@ class LinggleAPI(API):
     you can use ver parameter to select different API version.
 
     ver: Version can be `www`, `coca`, `cna`, `udn`, `zh, `x`
-    
+
     Parameters
     ----------
     ver : {'www', 'coca', 'cna', 'udn', 'zh', 'x'}
