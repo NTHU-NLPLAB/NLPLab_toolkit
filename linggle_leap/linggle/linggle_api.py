@@ -7,7 +7,7 @@ API_URI = "https://{0}.linggle.com/"
 # ver: Version can be `www`, `coca`, `cna`, `udn`, `zh, `x`
 class LinggleAPI(dict):
     """This is `Linggle <https://linggle.com/>`_ api class.
-    you can use ver parameter to select different API version.
+    you can use `ver` parameter to select different API version.
 
     ver: Version can be `www`, `coca`, `cna`, `udn`, `zh, `x`
 
@@ -24,13 +24,14 @@ class LinggleAPI(dict):
     """
 
     def __init__(self, ver="www"):
-        self.api_url = API_URI.format(ver)
+        self.ver = ver
+        self.api_url = urljoin(API_URI.format(ver), 'query')
 
     def __getitem__(self, query):
         return self.query(query)
 
-    def query(self, query, x_lang="en"):
-        """This function query Linggle by query argument
+    def query(self, query):
+        """This function gets ngrams from Linggle
 
         Parameters
         ----------
@@ -42,8 +43,7 @@ class LinggleAPI(dict):
             Default value is "en".
         Returns
         -------
-        NgramResult : dict
-            query, ngrams, total
+        results : list of (ngram, count)
 
 
 
@@ -61,18 +61,18 @@ class LinggleAPI(dict):
         >>> api.query(u'吃藥', x_lang='zh')
         {...}
         """
-        if x_lang == "zh" and self.ver == "x":
-            # self.ngram_api = NGRAM_API_URI.replace("query", "equery")
-            self.ngram_api = "https://x.linggle.com/equery/"
-        req = requests.get(urljoin(urljoin(self.api_url, 'query'), quote_plus(query)))
+        # TODO: add back xlinggle
+        # if x_lang == "zh" and self.ver == "x":
+        #     self.ngram_api = "https://x.linggle.com/equery/"
+        req = requests.get(urljoin(self.api_url, quote_plus(query)))
         if req.status_code == 200:
             return req.json()['ngrams']
         else:
             # TODO: handle when status code is not 200
             pass
 
-    def get_example(self, ngram_str):
-        """This function query Linggle by query argument
+    def get_example(self, ngram):
+        """This function gets example of ngram from Linggle
 
         Parameters
         ----------
@@ -93,10 +93,16 @@ class LinggleAPI(dict):
         [...]
 
         """
-        if self.ver == "x":
-            req = requests.get("https://x.linggle.com/tgtngram/")
-        else:
-            req = requests.post(self.example_api, json={"ngram": ngram_str})
+        # TODO: add back xlinggle
+        # if self.ver == "x":
+        #     req = requests.get("https://x.linggle.com/tgtngram/")
+        # else:
+        req = requests.post(self.example_api, json={"ngram": ngram})
         if req.status_code == 200:
             result = req.json()
             return result.get("examples", [])
+
+
+if __name__ == "__main__":
+    import doctest
+    doctest.testmod()
