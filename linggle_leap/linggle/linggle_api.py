@@ -1,12 +1,11 @@
 import requests
-import urllib
+from urllib.parse import quote_plus, urljoin
 
-NGRAM_API_URI = "https://{0}.linggle.com/query/"
-EXP_API_URI = "https://{0}.linggle.com/example/"
+API_URI = "https://{0}.linggle.com/"
 
 
 # ver: Version can be `www`, `coca`, `cna`, `udn`, `zh, `x`
-class LinggleAPI():
+class LinggleAPI(dict):
     """This is `Linggle <https://linggle.com/>`_ api class.
     you can use ver parameter to select different API version.
 
@@ -25,12 +24,10 @@ class LinggleAPI():
     """
 
     def __init__(self, ver="www"):
-        self.ver = ver
-        self.ngram_api = NGRAM_API_URI.format(ver)
-        self.example_api = EXP_API_URI.format(ver)
+        self.api_url = API_URI.format(ver)
 
-    # def __getitem__(self, query):
-    #     return self.query(query)
+    def __getitem__(self, query):
+        return self.query(query)
 
     def query(self, query, x_lang="en"):
         """This function query Linggle by query argument
@@ -67,11 +64,12 @@ class LinggleAPI():
         if x_lang == "zh" and self.ver == "x":
             # self.ngram_api = NGRAM_API_URI.replace("query", "equery")
             self.ngram_api = "https://x.linggle.com/equery/"
-        query = query.replace("/", "@")
-        query = urllib.parse.quote(query, safe="")
-        req = requests.get(self.ngram_api + query)
+        req = requests.get(urljoin(urljoin(self.api_url, 'query'), quote_plus(query)))
         if req.status_code == 200:
-            return req.json()
+            return req.json()['ngrams']
+        else:
+            # TODO: handle when status code is not 200
+            pass
 
     def get_example(self, ngram_str):
         """This function query Linggle by query argument
