@@ -1,7 +1,4 @@
-from collections import namedtuple
 
-NGRAM_API_URI = "https://{0}.linggle.com/query/"
-EXP_API_URI = "https://{0}.linggle.com/example/"
 API_LIST = [
     'www',
     'coca',
@@ -20,5 +17,3 @@ API_LIST = [
     'langnet',
     'textnet'
 ]
-
-NgramResult = namedtuple("NgramResult", ["query", "ngrams", "total"])
