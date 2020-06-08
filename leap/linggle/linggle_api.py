@@ -5,7 +5,7 @@ API_URI = "https://{0}.linggle.com/"
 
 
 # ver: Version can be `www`, `coca`, `cna`, `udn`, `zh, `x`
-class LinggleAPI(dict):
+class Linggle(dict):
     """This is `Linggle <https://linggle.com/>`_ api class.
     you can use `ver` parameter to select different API version.
 

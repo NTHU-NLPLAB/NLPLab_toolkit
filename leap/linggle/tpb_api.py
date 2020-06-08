@@ -2,7 +2,7 @@ import requests
 import urllib
 
 
-class PhraseBookAPI():
+class TotalPhraseBook():
     def __init__(self):
         self.API_URI = "https://bi.linggle.com/phrase/"
         self.EXAMPLE_URI = "https://bi.linggle.com/sentence"

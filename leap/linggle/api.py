@@ -1,5 +1,25 @@
 # -*- coding: utf-8 -*-
-from .config import API_LIST
+from leap import Linggle, TotalPhraseBook
+
+
+API_LIST = (
+    'www',
+    'coca',
+    'cna',
+    'udn',
+    'zh',
+    'x',
+    'bi',
+    'writeahead',
+    'smartwrite',
+    'cooleng',
+    'lingglewrite',
+    'levelup',
+    'tellmewhy',
+    'booster',
+    'langnet',
+    'textnet'
+)
 
 
 class APIFactory:
@@ -17,8 +37,8 @@ class APIFactory:
             * cna - 中央社
             * udn - 聯合新聞網
             * zh
-            * x - 雙語Linggle
-            * bi - PhraseBookAPI
+            * x - 雙語 Linggle
+            * bi - TotalPhraseBook
     """
 
     @staticmethod
@@ -37,19 +57,13 @@ class APIFactory:
             query, ngrams, total
 
 
-
-        Example
-        -------
-        >>> from linggle_leap.linggle.api import APIFactory
-        >>> api = APIFactory.get_api('www')
-
         """
         if name not in API_LIST:
             return None
-        if name in ["www", "coca", "cna", "udn", "zh", "x"]:
-            return LinggleAPI(name)
+        if name in ("www", "coca", "cna", "udn", "zh", "x"):
+            return Linggle(name)
         if name == "bi":
-            return PhraseBookAPI()
+            return TotalPhraseBook()
 
 
 if __name__ == "__main__":
