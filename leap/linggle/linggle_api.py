@@ -49,21 +49,12 @@ class Linggle(dict):
 
         Example
         -------
-        >>> from linggle_leap.linggle.api import APIFactory
-        >>> api = APIFactory.get_api('www')
-        >>> api.query('discuss ?about the issue')
+        >>> from leap import Linggle
+        >>> linggle = Linggle()
+        >>> linggle.query('discuss ?about the issue')
         {...}
 
-        Example - x.linggle
-        -------
-        >>> from linggle_leap.linggle.api import APIFactory
-        >>> api = APIFactory.get_api('x')
-        >>> api.query(u'吃藥', x_lang='zh')
-        {...}
         """
-        # TODO: add back xlinggle
-        # if x_lang == "zh" and self.ver == "x":
-        #     self.ngram_api = "https://x.linggle.com/equery/"
         req = requests.get(urljoin(self.api_url, quote_plus(query)))
         if req.status_code == 200:
             return req.json()['ngrams']
@@ -76,31 +67,25 @@ class Linggle(dict):
 
         Parameters
         ----------
-        ngram_str : str
-            The query string to query Linggle
+        ngram : str
+            The ngram to query for examples
 
         Returns
         -------
-        results : list of str
+        results : list of example sentences
 
 
         Example
         -------
-        >>> from linggle_leap.linggle.api import APIFactory
-        >>> from pprint import pprint
-        >>> api = APIFactory.get_api('www')
-        >>> pprint(api.get_example('get a'))
+        >>> from leap import Linggle
+        >>> linggle = Linggle()
+        >>> linggle.get_example('present a method')
         [...]
 
         """
-        # TODO: add back xlinggle
-        # if self.ver == "x":
-        #     req = requests.get("https://x.linggle.com/tgtngram/")
-        # else:
         req = requests.post(self.example_api, json={"ngram": ngram})
         if req.status_code == 200:
-            result = req.json()
-            return result.get("examples", [])
+            return req.json().get("examples", [])
 
 
 if __name__ == "__main__":
