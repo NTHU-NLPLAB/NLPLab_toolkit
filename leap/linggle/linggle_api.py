@@ -1,7 +1,7 @@
 import requests
 from urllib.parse import quote, urljoin
 
-API_URI = "https://{0}.linggle.com/"
+API_URL = "https://{0}.linggle.com/"
 
 
 # ver: Version can be `www`, `coca`, `cna`, `udn`, `zh, `x`
@@ -25,7 +25,25 @@ class Linggle(dict):
 
     def __init__(self, ver="www"):
         self.ver = ver
-        self.api_url = urljoin(API_URI.format(ver), 'ngram/')
+
+    @property
+    def ver(self):
+        return self.ver
+
+    @ver.setter
+    def set_version(self, ver):
+        self.ver = ver
+        url = API_URL.format(ver)
+        self.__ngram_api_url = urljoin(url, 'ngram/')
+        self.__example_api_url = urljoin(url, 'example/')
+
+    @property
+    def ngram_api_url(self):
+        return self.__ngram_api_url
+
+    @property
+    def example_api_url(self):
+        return self.__example_api_url
 
     def __getitem__(self, query):
         return self.query(query)
@@ -46,13 +64,13 @@ class Linggle(dict):
 
         Example
         -------
-        >>> from leap import Linggle
         >>> linggle = Linggle()
         >>> linggle.query('discuss ?about the issue')
-        {...}
+        [['discuss the issue', 147489], ['discuss about the issue', 98]]
 
         """
-        req = requests.get(urljoin(self.api_url, quote(query, safe='')))
+        url = urljoin(self.ngram_api_url, quote(query, safe=''))
+        req = requests.get(url)
         if req.status_code == 200:
             return req.json()['ngrams']
         else:
@@ -74,15 +92,18 @@ class Linggle(dict):
 
         Example
         -------
-        >>> from leap import Linggle
         >>> linggle = Linggle()
         >>> linggle.get_example('present a method')
         [...]
 
         """
-        req = requests.post(self.example_api, json={"ngram": ngram})
+        url = urljoin(self.example_api_url, quote(ngram, safe=''))
+        req = requests.get(url)
         if req.status_code == 200:
             return req.json().get("examples", [])
+        else:
+            # TODO: handle when status code is not 200
+            pass
 
 
 if __name__ == "__main__":
