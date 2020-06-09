@@ -1,5 +1,5 @@
 import requests
-from urllib.parse import quote_plus, urljoin
+from urllib.parse import quote, urljoin
 
 API_URI = "https://{0}.linggle.com/"
 
@@ -25,7 +25,7 @@ class Linggle(dict):
 
     def __init__(self, ver="www"):
         self.ver = ver
-        self.api_url = urljoin(API_URI.format(ver), 'query')
+        self.api_url = urljoin(API_URI.format(ver), 'ngram/')
 
     def __getitem__(self, query):
         return self.query(query)
@@ -36,11 +36,8 @@ class Linggle(dict):
         Parameters
         ----------
         query : str
-            The query string to query Linggle
-            you can check `Linggle <https://linggle.com/>`_ for more details.
-        x_lang : str{'en', 'zh'}
-            The query language to use in x.linggle, this parameter will only be applied when version is set as "x".
-            Default value is "en".
+            The query string to query Linggle.
+            You can check `Linggle <https://linggle.com/>`_ for more instructions.
         Returns
         -------
         results : list of (ngram, count)
@@ -55,7 +52,7 @@ class Linggle(dict):
         {...}
 
         """
-        req = requests.get(urljoin(self.api_url, quote_plus(query)))
+        req = requests.get(urljoin(self.api_url, quote(query, safe='')))
         if req.status_code == 200:
             return req.json()['ngrams']
         else:
