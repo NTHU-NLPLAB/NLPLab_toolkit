@@ -24,15 +24,18 @@ class Linggle(dict):
     """
 
     def __init__(self, ver="www"):
-        self.ver = ver
+        self.__ver = ver
+        url = API_URL.format(ver)
+        self.__ngram_api_url = urljoin(url, 'ngram/')
+        self.__example_api_url = urljoin(url, 'example/')
 
     @property
     def ver(self):
-        return self.ver
+        return self.__ver
 
     @ver.setter
     def set_version(self, ver):
-        self.ver = ver
+        self.__ver = ver
         url = API_URL.format(ver)
         self.__ngram_api_url = urljoin(url, 'ngram/')
         self.__example_api_url = urljoin(url, 'example/')
@@ -93,7 +96,7 @@ class Linggle(dict):
         Example
         -------
         >>> linggle = Linggle()
-        >>> linggle.get_example('present a method')
+        >>> linggle.get_example('the pandemic')
         [...]
 
         """
