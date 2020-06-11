@@ -84,8 +84,26 @@ def check_essay(text):
 
 
 def suggest_edits(ngram, error_type):
-    """
-    print(suggest_edits('good this', 'insert'))
+    """This is `LinggleWrite <https://f.linggle.com/>`_ api function for suggesting edits given a
+    problematic ngram and the error type.
+    It will
+
+    Parameters
+    ----------
+    ngram : str
+        the ngram which may contain an error
+    error_type : {'delete', 'insert', 'replace'}
+        The error type of the ngram
+
+    Returns
+        -------
+        results : suggested linggle query and the result
+
+
+    Example
+    -------
+    >>> suggest_edits('in tent', 'insert')  # doctest: +ELLIPSIS
+    {'query': 'in ?_ tent', 'ngrams': [...]}
     """
     r = requests.get(urljoin(__suggest_api_url, quote(ngram, safe='')), params={'err_type': error_type})
     return r.json()
