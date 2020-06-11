@@ -48,8 +48,8 @@ def assess_essay(text):
 
     Example
     -------
-    >>> assess_essay('Let me tell you a')  # doctest: +ELLIPSIS
-    '...'
+    >>> assess_essay('Let me tell you a story.')
+    'A2'
 
     """
     # TODO: fix the typo in api: courpus -> corpus, cerf -> cefr
@@ -58,6 +58,25 @@ def assess_essay(text):
 
 
 def check_essay(text):
+    """This is `LinggleWrite <https://f.linggle.com/>`_ api function for checking an essay.
+    you can enter a text and it will return sentence scores, tokenized sentences, and tags in DIRC format.
+
+    Parameters
+    ----------
+    text : str
+        An essay to be checked
+
+    Returns
+        -------
+        results : sentence scores, tokenized sentences, and tags in DIRC format
+
+
+    Example
+    -------
+    >>> check_essay('We can stay in tent.')
+    [(['We', 'can', 'stay', 'in', 'tent', '.'], ['O', 'O', 'O', 'O', 'B-I', 'O'], 0.16666666666666666)]
+
+    """
     # TODO: fix the typo in api: courpus -> corpus
     r = requests.post(__check_api_url, json={'courpus': text})
     result = r.json()
