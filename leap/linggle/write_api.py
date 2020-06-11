@@ -9,6 +9,25 @@ __suggest_api_url = urljoin(API_URL, 'suggest/')
 
 
 def suggest_pattern(text):
+    """This is `LinggleWrite <https://f.linggle.com/>`_ api function for writing suggestions.
+    you can enter a text and it will provide continuous writing suggestions.
+
+    Parameters
+    ----------
+    text : str
+        An incomplete text to suggestion continuous writing pattern
+
+    Returns
+        -------
+        results : the headword, PoS, and continuous writing patterns
+
+
+    Example
+    -------
+    >>> suggest_pattern('Let me tell you a')  # doctest: +ELLIPSIS
+    {'text': 'Let me tell you a', 'headword': 'tell', 'pos': 'V', 'patterns': [...]}
+
+    """
     r = requests.post(__write_api_url, json={'text': text})
     return r.json()
 
