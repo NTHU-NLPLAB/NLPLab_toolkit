@@ -10,17 +10,7 @@ __suggest_api_url = urljoin(API_URL, 'suggest/')
 
 def suggest_pattern(text):
     """This is `LinggleWrite <https://f.linggle.com/>`_ api function for writing suggestions.
-    you can enter a text and it will provide continuous writing suggestions.
-
-    Parameters
-    ----------
-    text : str
-        An incomplete text to suggestion continuous writing pattern
-
-    Returns
-        -------
-        results : the headword, PoS, and continuous writing patterns
-
+    You can enter a text and it will provide continuous writing suggestions.
 
     Example
     -------
@@ -34,17 +24,7 @@ def suggest_pattern(text):
 
 def assess_essay(text):
     """This is `LinggleWrite <https://f.linggle.com/>`_ api function for assessing an essay.
-    you can enter a text and it will provide a CEFR level.
-
-    Parameters
-    ----------
-    text : str
-        An essay to be assessed
-
-    Returns
-        -------
-        results : a CEFR level
-
+    You can enter a text and it will provide a CEFR level.
 
     Example
     -------
@@ -59,17 +39,8 @@ def assess_essay(text):
 
 def check_essay(text):
     """This is `LinggleWrite <https://f.linggle.com/>`_ api function for checking an essay.
-    you can enter a text and it will return sentence scores, tokenized sentences, and tags in DIRC format.
-
-    Parameters
-    ----------
-    text : str
-        An essay to be checked
-
-    Returns
-        -------
-        results : sentence scores, tokenized sentences, and tags in DIRC format
-
+    You can enter a text and it will return sentence scores, tokenized sentences,
+    and tags in DIRC format.
 
     Example
     -------
@@ -86,24 +57,13 @@ def check_essay(text):
 def suggest_edits(ngram, error_type):
     """This is `LinggleWrite <https://f.linggle.com/>`_ api function for suggesting edits given a
     problematic ngram and the error type.
-    It will
-
-    Parameters
-    ----------
-    ngram : str
-        the ngram which may contain an error
-    error_type : {'delete', 'insert', 'replace'}
-        The error type of the ngram
-
-    Returns
-        -------
-        results : suggested linggle query and the result
-
+    It will return suggestions with a linggle query and query results.
 
     Example
     -------
     >>> suggest_edits('in tent', 'insert')  # doctest: +ELLIPSIS
     {'query': 'in ?_ tent', 'ngrams': [...]}
+
     """
     r = requests.get(urljoin(__suggest_api_url, quote(ngram, safe='')), params={'err_type': error_type})
     return r.json()
