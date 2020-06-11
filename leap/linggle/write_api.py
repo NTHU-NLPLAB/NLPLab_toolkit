@@ -33,6 +33,25 @@ def suggest_pattern(text):
 
 
 def assess_essay(text):
+    """This is `LinggleWrite <https://f.linggle.com/>`_ api function for assessing an essay.
+    you can enter a text and it will provide a CEFR level.
+
+    Parameters
+    ----------
+    text : str
+        An essay to be assessed
+
+    Returns
+        -------
+        results : a CEFR level
+
+
+    Example
+    -------
+    >>> assess_essay('Let me tell you a')  # doctest: +ELLIPSIS
+    '...'
+
+    """
     # TODO: fix the typo in api: courpus -> corpus, cerf -> cefr
     r = requests.post(__aes_api_url, json={'courpus': text})
     return r.json().get('cerf')
