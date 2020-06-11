@@ -68,8 +68,8 @@ class Linggle(dict):
         Example
         -------
         >>> linggle = Linggle()
-        >>> linggle.query('discuss ?about the issue')
-        [['discuss the issue', 147489], ['discuss about the issue', 98]]
+        >>> linggle.query('discuss ?about the issue')  # doctest: +ELLIPSIS
+        [...]
 
         """
         url = urljoin(self.ngram_api_url, quote(query, safe=''))
@@ -96,7 +96,7 @@ class Linggle(dict):
         Example
         -------
         >>> linggle = Linggle()
-        >>> linggle.get_example('the pandemic')
+        >>> linggle.get_example('present a method')  # doctest: +ELLIPSIS
         [...]
 
         """
