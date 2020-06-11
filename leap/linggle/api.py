@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 from leap import Linggle, TotalPhraseBook
 
 
