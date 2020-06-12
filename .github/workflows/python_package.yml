@@ -19,18 +19,18 @@ jobs:
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
-          pip install -r linggle_leap/requirements.txt
+          pip install -r linggle/requirements.txt
 
       - name: Format code
         run: |
           pip install black
-          black linggle_leap
+          black linggle
 
       - name: Lint with flake8
         run: |
           pip install flake8
           # stop the build if there are Python syntax errors or undefined names
-          flake8 linggle_leap --count --select=E9,F63,F7,F82 --show-source --statistics
+          flake8 linggle --count --select=E9,F63,F7,F82 --show-source --statistics
           # exit-zero treats all errors as warnings. The GitHub editor is 127 chars wide
           # flake8 linggle_leap
 
