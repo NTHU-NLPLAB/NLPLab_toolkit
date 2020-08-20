@@ -61,7 +61,7 @@ def suggest_edits(ngram, error_type, index):
 
     Example
     -------
-    >>> suggest_edits('in tent', 'insert')  # doctest: +ELLIPSIS
+    >>> suggest_edits('in tent', 'insert', 1)  # doctest: +ELLIPSIS
     {'query': 'in ?_ tent', 'ngrams': [...]}
 
     """
