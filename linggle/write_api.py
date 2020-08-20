@@ -54,7 +54,7 @@ def check_essay(text):
     return list(zip(result.get('sen_arry'), result.get('tag_arry'), result.get('score_arry')))
 
 
-def suggest_edits(ngram, error_type):
+def suggest_edits(ngram, error_type, index):
     """This is `LinggleWrite <https://f.linggle.com/>`_ api function for suggesting edits given a
     problematic ngram and the error type.
     It will return suggestions with a linggle query and query results.
@@ -65,7 +65,7 @@ def suggest_edits(ngram, error_type):
     {'query': 'in ?_ tent', 'ngrams': [...]}
 
     """
-    r = requests.get(urljoin(__suggest_api_url, quote(ngram, safe='')), params={'err_type': error_type})
+    r = requests.get(urljoin(__suggest_api_url, quote(ngram, safe='')), params={'err_type': error_type, 'index': index})
     return r.json()
 
 
