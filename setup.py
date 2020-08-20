@@ -13,7 +13,7 @@ install_requires = list(install_requires)
 
 setuptools.setup(
     name=PYPI_NAME,
-    version="0.0.3",
+    version="0.0.4",
     author="sappy5678, dspp779, ",
     author_email="sappy@nlplab.cc, jjc@nlplab.cc, isaackch@nlplab.cc",
     description="This toolkit contains APIs for Linggle, LinggleGEC, LinggleWrite, and LinggleBooster.",
