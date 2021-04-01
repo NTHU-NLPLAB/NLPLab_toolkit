@@ -100,8 +100,8 @@ class Linggle(dict):
         [...]
 
         """
-        url = urljoin(self.example_api_url, quote(ngram, safe=''))
-        req = requests.get(url)
+        url = self.example_api_url
+        req = requests.post(url, json = { 'ngram': ngram })
         if req.status_code == 200:
             return req.json().get("examples", [])
         else:
