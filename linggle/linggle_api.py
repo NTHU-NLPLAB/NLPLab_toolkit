@@ -23,11 +23,15 @@ class Linggle(dict):
             * x - 雙語Linggle
     """
 
-    def __init__(self, ver="www"):
+    def __init__(self, ver="www", clean_example=True):
         self.__ver = ver
         url = API_URL.format(ver)
         self.__ngram_api_url = urljoin(url, 'ngram/')
-        self.__example_api_url = urljoin(url, 'example/')
+        clean_example = ver == 'www' and clean_example
+        if clean_example:
+            self.__example_api_url = 'http://whisky.nlplab.cc:9488/example/coca'
+        else:
+            self.__example_api_url = urljoin(url, 'example/')
 
     @property
     def ver(self):
@@ -101,7 +105,7 @@ class Linggle(dict):
 
         """
         url = self.example_api_url
-        req = requests.post(url, json = { 'ngram': ngram })
+        req = requests.post(url, json={'ngram': ngram})
         if req.status_code == 200:
             return req.json().get("examples", [])
         else:
