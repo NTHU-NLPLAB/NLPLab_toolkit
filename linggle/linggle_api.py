@@ -29,7 +29,7 @@ class Linggle(dict):
         self.__ngram_api_url = urljoin(url, 'ngram/')
         clean_example = ver == 'www' and clean_example
         if clean_example:
-            self.__example_api_url = 'http://whisky.nlplab.cc:9488/example/coca'
+            self.__example_api_url = 'http://joker.nlplab.cc:9488/example/coca'
         else:
             self.__example_api_url = urljoin(url, 'example/')
 
